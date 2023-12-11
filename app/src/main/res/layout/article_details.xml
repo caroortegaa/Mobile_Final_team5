@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="223dp"
+                android:layout_width="205dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_launcher_foreground" />
@@ -35,7 +35,7 @@
 
                 <TextView
                     android:id="@+id/article_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="79dp"
                     android:layout_height="wrap_content"
                     android:text="Title"
                     android:textSize="34sp" />
@@ -69,7 +69,16 @@
                     android:layout_height="wrap_content"
                     android:text="Body" />
             </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Article"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="211dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,41 @@
     tools:context=".MainActivity" >
 
     <ListView
+        android:id="@+id/article_list"
         android:layout_width="409dp"
-        android:layout_height="605dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="125dp" />
+        android:layout_height="655dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="409dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="4dp"
+        android:background="#009688"
+        android:text="Newspaper app"
+        android:textAlignment="center"
+        android:textColor="#F1EFEF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/new_article_button"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:text="New Article"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.053" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
