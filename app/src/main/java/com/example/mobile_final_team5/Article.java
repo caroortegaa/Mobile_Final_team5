@@ -6,14 +6,17 @@ import org.json.simple.JSONObject;
 import java.util.Hashtable;
 
 import com.example.mobile_final_team5.exceptions.ServerCommunicationError;
+import com.google.gson.annotations.SerializedName;
 
 public class Article extends ModelEntity{
 	
-	private String titleText;
-	private String category;
+	public String title;
+	public String category;
+	@SerializedName("abstract")
 	private String abstractText;
-	private String bodyText;
+	private String body;
 	private String footerText;
+	public String subtitle;
 	private int idUser;
 	private Image mainImage;
 	private String imageDescription;
@@ -30,12 +33,13 @@ public class Article extends ModelEntity{
 		try{
 			id = Integer.parseInt(jsonArticle.get("id").toString());
 			idUser = Integer.parseInt(parseStringFromJson(jsonArticle,"id_user","0"));
-			titleText = parseStringFromJson(jsonArticle,"title","").replaceAll("\\\\","");
+			title = parseStringFromJson(jsonArticle,"title","").replaceAll("\\\\","");
 			category = parseStringFromJson(jsonArticle,"category","").replaceAll("\\\\","");
 			abstractText = parseStringFromJson(jsonArticle,"abstract","").replaceAll("\\\\","");
-			bodyText = parseStringFromJson(jsonArticle,"body","").replaceAll("\\\\","");
+			body = parseStringFromJson(jsonArticle,"body","").replaceAll("\\\\","");
 			footerText = parseStringFromJson(jsonArticle,"footer","").replaceAll("\\\\","");
-			
+			subtitle = parseStringFromJson(jsonArticle,"subtitle","").replaceAll("\\\\","");
+
 			imageDescription = parseStringFromJson(jsonArticle,"image_description","").replaceAll("\\\\","");
 			thumbnail = parseStringFromJson(jsonArticle,"thumbnail_image","").replaceAll("\\\\","");
 			
@@ -49,15 +53,16 @@ public class Article extends ModelEntity{
 		}
 	}
 	
-	public Article(ModelManager mm, String category, String titleText, String abstractText, String body, String footer){
+	public Article(ModelManager mm, String category, String title, String subtitle,String abstractText, String body, String footer){
 		super(mm);
 		id = -1;
 		this.category = category;
 		idUser = Integer.parseInt(mm.getIdUser());
 		this.abstractText = abstractText;
-		this.titleText = titleText;
-		bodyText = body;
-		footerText = footer;
+		this.title = title;
+		this.body = body;
+		this.footerText = footer;
+		this.subtitle = subtitle;
 		
 	}
 	
@@ -72,7 +77,7 @@ public class Article extends ModelEntity{
 	}
 	
 	public String getTitleText() {
-		return titleText;
+		return title;
 	}
 	
 	public String getCategory() {
@@ -81,8 +86,8 @@ public class Article extends ModelEntity{
 	public void setCategory(String category) {
 		this.category= category;
 	}
-	public void setTitleText(String titleText) {
-		this.titleText = titleText;
+	public void setTitleText(String title) {
+		this.title = title;
 	}
 	public String getAbstractText() {
 		return abstractText;
@@ -91,10 +96,10 @@ public class Article extends ModelEntity{
 		this.abstractText = abstractText;
 	}
 	public String getBodyText() {
-		return bodyText;
+		return body;
 	}
-	public void setBodyText(String bodyText) {
-		this.bodyText = bodyText;
+	public void setBodyText(String body) {
+		this.body = body;
 	}
 	public String getFooterText() {
 		return footerText;
@@ -102,6 +107,8 @@ public class Article extends ModelEntity{
 	public void setFooterText(String footerText) {
 		this.footerText = footerText;
 	}
+	public String getSubtitleText() {return subtitle;}
+	public void setSubtitleText(String subtitleText) {this.subtitle = subtitle;}
 	
 	public int getIdUser(){
 		return idUser;
@@ -123,18 +130,20 @@ public class Article extends ModelEntity{
 		mainImage= img;
 		return img;
 	}
+
 	
 	@Override
 	public String toString() {
 		return "Article [id=" + getId()
 				//+ "isPublic=" + isPublic + ", isDeleted=" + isDeleted 
-				+", titleText=" + titleText  
-				+", abstractText=" + abstractText 
-				+  ", bodyText="	+ bodyText + ", footerText=" + footerText 
+				+", title=" + title
+				+", abstractText=" + abstractText
+				+  ", body="	+ body + ", footerText=" + footerText
+				+", subtitle=" + subtitle
 				//+ ", publicationDate=" + Utils.dateToString(publicationDate) 
 				+", image_description=" + imageDescription
 				+", image_data=" + mainImage
-				+", thumbnail=" + thumbnail 
+				+", thumbnail=" + thumbnail
 				+ "]";
 	}
 	
@@ -144,9 +153,9 @@ public class Article extends ModelEntity{
 		//res.put("id_user", ""+idUser);
 		res.put("category", category);
 		res.put("abstract", abstractText);
-		res.put("title", titleText);
+		res.put("title", title);
 		//res.put("is_deleted", ""+(isDeleted?1:0));
-		res.put("body", bodyText);
+		res.put("body", body);
 		res.put("subtitle", footerText);
 		if (mainImage!=null){
 			res.put("image_data", mainImage.getImage());

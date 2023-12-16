@@ -522,4 +522,10 @@ public class ModelManager {
 			deleteArticle(((Article)o).getId());
 		}
 	}
+
+	public String getServiceUrl() {
+		return serviceUrl;
+	}
+
+
 }

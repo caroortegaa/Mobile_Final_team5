@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <ListView
         android:id="@+id/article_list"
-        android:layout_width="409dp"
-        android:layout_height="619dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="412dp"
+        android:layout_height="673dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+    </ListView>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="409dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="410dp"
+        android:layout_height="77dp"
         android:background="#009688"
         android:text="Newspaper app"
         android:textAlignment="center"
@@ -33,80 +33,87 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/new_article_button"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:text="New Article"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="56dp"
-        android:layout_height="32dp"
-        android:text="All"
-        android:textSize="5sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="70dp"
-        android:layout_height="32dp"
-        android:text="National"
-        android:textSize="5sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
-
-    <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_tech"
         android:layout_width="75dp"
         android:layout_height="31dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="10dp"
         android:text="Technology"
         android:textSize="5sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/article_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.001" />
 
     <Button
-        android:id="@+id/button6"
-        android:layout_width="76dp"
+        android:id="@+id/button_all"
+        android:layout_width="56dp"
         android:layout_height="32dp"
-        android:text="Economy"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"
+        android:text="All"
         android:textSize="5sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintBottom_toTopOf="@+id/article_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.001" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button_national"
+        android:layout_width="70dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
+        android:text="National"
+        android:textSize="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/article_list"
+        app:layout_constraintEnd_toStartOf="@+id/button_tech"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/button_all"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.001" />
+
+    <Button
+        android:id="@+id/button_sports"
         android:layout_width="71dp"
         android:layout_height="31dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"
         android:text="Sports"
         android:textSize="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/article_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_toEndOf="@+id/button_economy"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <Button
+        android:id="@+id/button_economy"
+        android:layout_width="76dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"
+        android:text="Economy"
+        android:textSize="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/article_list"
+        app:layout_constraintStart_toEndOf="@+id/button_tech"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.003" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
