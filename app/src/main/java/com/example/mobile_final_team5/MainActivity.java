@@ -3,6 +3,7 @@ package com.example.mobile_final_team5;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -44,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         ListView lv = findViewById(R.id.article_list);
         adapter = new ArticleAdapter(this, articles);
         lv.setAdapter(adapter);
-
-
 
 
         // category buttons
@@ -96,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Filter and update the adapter's data
         adapter.filterDataByCategory();
-
-        ListView lv = findViewById(R.id.article_list);
-        lv.setAdapter(adapter);
     }
 
 }

@@ -1,6 +1,10 @@
 package com.example.mobile_final_team5;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import org.json.simple.JSONObject;
 
 import java.util.Hashtable;
@@ -20,6 +24,7 @@ public class Article extends ModelEntity{
 	private int idUser;
 	private Image mainImage;
 	private String imageDescription;
+	@SerializedName("thumbnail_image")
 	private String thumbnail;
 
 	private String parseStringFromJson(JSONObject jsonArticle, String key, String def){
@@ -114,24 +119,39 @@ public class Article extends ModelEntity{
 		return idUser;
 	}
 	public Image getImage() throws ServerCommunicationError {
-		Image image = mainImage;
-		if (mainImage==null && thumbnail!=null && !thumbnail.isEmpty()){
-			image = new Image(mm,1,"",getId(),thumbnail);
+		if (thumbnail!=null && !thumbnail.isEmpty()){
+			return new Image(mm,1,"",getId(),thumbnail);
 		}
-		return image;
+		return null;
 	}
 	public void setImage(Image image) {
 		this.mainImage = image;
 	}
+	public String getThumbnailImage() {
+		return thumbnail;
+	} //i added this but idk if we should use getImage
 	
-	public Image addImage(String b64Image, String description) throws ServerCommunicationError{	
+	/*public Image addImage(String b64Image, String description) throws ServerCommunicationError{
 		int order = 1;
 		Image img =new Image(mm, order, description, getId(), b64Image);
 		mainImage= img;
 		return img;
+	}*/
+	public Image addImage(String b64Image, String description) throws ServerCommunicationError {
+		int order = 1;
+		Image img = new Image(mm, order, description, getId(), b64Image);
+		mainImage = img;
+
+		// Decode Base64 image data and set it to Bitmap
+		byte[] decodedString = Base64.decode(b64Image, Base64.DEFAULT);
+		Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+		mainImage.setBitmap(decodedBitmap);
+
+		return img;
 	}
 
-	
+
+
 	@Override
 	public String toString() {
 		return "Article [id=" + getId()

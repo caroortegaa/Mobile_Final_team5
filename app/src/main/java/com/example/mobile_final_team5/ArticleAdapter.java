@@ -3,6 +3,10 @@ package com.example.mobile_final_team5;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.Html;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mobile_final_team5.Article;
+import com.example.mobile_final_team5.exceptions.ServerCommunicationError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +72,7 @@ public class ArticleAdapter extends BaseAdapter {
             }
         }
 
-        notifyDataSetChanged();  // Notify the adapter that the data set has changed
+        notifyDataSetChanged();// Notify the adapter that the data set has changed
         Log.d("ArticleAdapter", "Filtered data size: " + filteredData.size());
     }
     public void setFilteredData(List<Article> filteredData) {
@@ -84,16 +89,27 @@ public class ArticleAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.article_details, null, true);
         }
 
-        Article articleShown = data.get(i);
+        Article articleShown = filteredData.get(i);
         TextView articleTitle = view.findViewById(R.id.article_title);
         articleTitle.setText(articleShown.getTitleText() + "");
 
         ((TextView) view.findViewById(R.id.article_subtitle)).setText(articleShown.getSubtitleText() + "");
         ((TextView) view.findViewById(R.id.article_category)).setText(articleShown.getCategory() + "");
-        ((TextView) view.findViewById(R.id.article_abstract)).setText(articleShown.getAbstractText() + "");
-        //((TextView) view.findViewById(R.id.article_body)).setText(articleShown.getBodyText() + "");
-        //((TextView) view.findViewById(R.id.article_image).setI;
+        //((TextView) view.findViewById(R.id.article_abstract)).setText(articleShown.getAbstractText() + "");
+        ((TextView)view.findViewById(R.id.article_abstract)).setText(Html.fromHtml(articleShown.getAbstractText())+"");
+       // ((TextView) view.findViewById(R.id.article_body)).setText(articleShown.getBodyText() + "");
+        try {
+            if(articleShown.getImage() != null) {
+                ((ImageView) view.findViewById(R.id.article_image)).setImageBitmap(articleShown.getImage().getBitmap());
+            } else{
+                ((ImageView) view.findViewById(R.id.article_image)).setImageResource(R.drawable.ic_launcher_background);
+            }
 
+
+
+        } catch (ServerCommunicationError e) {
+            throw new RuntimeException(e);
+        }
 
         Button btnOpenArticleDetails = view.findViewById(R.id.edit_button);
         btnOpenArticleDetails.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +121,18 @@ public class ArticleAdapter extends BaseAdapter {
                 intent.putExtra("category", articleShown.getCategory());
                 intent.putExtra("abstract", articleShown.getAbstractText());
                 intent.putExtra("body", articleShown.getBodyText());
+                String imageData = null;
+                try {
+                    imageData = articleShown.getImage().getImage();
+                } catch (ServerCommunicationError e) {
+                    throw new RuntimeException(e);
+                }
+                intent.putExtra("imageData", imageData);
                 ctx.startActivity(intent);
             }
         });
         return view;
 
         }
+
 }

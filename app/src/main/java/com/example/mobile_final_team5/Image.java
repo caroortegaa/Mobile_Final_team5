@@ -1,5 +1,9 @@
 package com.example.mobile_final_team5;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import org.json.simple.JSONObject;
 
 import java.util.Hashtable;
@@ -9,6 +13,7 @@ public class Image extends ModelEntity{
 	private String description;
 	private int idArticle;
 	private String image;
+	private Bitmap bitmap;
 	
 	/**
 	 * Consructor of an Image, always through article, because an image shouldn't exist alone without one article
@@ -25,6 +30,7 @@ public class Image extends ModelEntity{
 		this.description = description;
 		this.idArticle=idArticle;
 		this.image = Utils.createScaledStrImage(b64Image,500,500);
+		setBitmap(image);
 	}
 	
 	/**
@@ -81,6 +87,20 @@ public class Image extends ModelEntity{
 	 */
 	public int getIdArticle() {
 		return idArticle;
+	}
+
+	public void setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
+	}
+
+	public void setBitmap(String image){
+		byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+		this.bitmap = decodedByte;
+	}
+
+	public Bitmap getBitmap() {
+		return bitmap;
 	}
 	
 	/**
